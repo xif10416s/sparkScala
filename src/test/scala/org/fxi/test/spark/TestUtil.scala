@@ -23,7 +23,7 @@ object TestUtil{
        val count = df.first();
         println(count);
       }
-    },new UserInfoSchemaLoader() );
+    },new UserInfoSchemaLoader() ); 
   }
 
 }
