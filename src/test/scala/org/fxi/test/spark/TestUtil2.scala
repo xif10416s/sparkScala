@@ -26,4 +26,13 @@ object TestUtil2{
     },new UserInfoSchemaLoader() );
   }
 
+  def testSqlhelperCreditLogDaily(): Unit ={
+    val sqlhelp = SqlHelper;
+    sqlhelp.executeSql("select count(*) from userInfo limit 10" , new ResultHander(){
+      override def handler(df: DataFrame): Unit = {
+        val count = df.first();
+        println(count);
+      }
+    },new UserInfoSchemaLoader() );
+  }
 }
