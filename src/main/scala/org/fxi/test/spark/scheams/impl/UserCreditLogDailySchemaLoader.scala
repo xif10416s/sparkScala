@@ -8,6 +8,8 @@ import org.fxi.test.spark.scheams.SchemaLoader
 import org.fxi.test.spark.util.FilePathConstants
 import org.fxi.test.spark.util.Utils
 
+import scala.collection.mutable.ListBuffer
+
 /**
  * Created by Administrator on 2015/4/26.
  */
@@ -17,12 +19,12 @@ class UserCreditLogDailySchemaLoader extends SchemaLoader {
 
   override def loadSchema(ctx: SparkContext, sqlCtx: SQLContext): Unit = {
     println("=== Data source: UserInfoSchemaLoader RDD ===");
-    val rddList:List[RDD[UserCreditLogDaily]] =  List();
+    val rddList:ListBuffer[RDD[UserCreditLogDaily]] =  ListBuffer[RDD[UserCreditLogDaily]]();
     for (path <- paths) {
       println(path);
       val creditLogDailyRdd = ctx.textFile(path).map(_.split(Utils.SPLIT_TAB)).map(u => UserCreditLogDaily(u(0), u(2), Utils.parseToInt(u(3)),
         Utils.parseToInt(u(1)), u(4), u(5), u(6)));
-      rddList::(creditLogDailyRdd);
+      rddList.append(creditLogDailyRdd);
     }
     println(rddList.length);
 
@@ -43,6 +45,7 @@ class UserCreditLogDailySchemaLoader extends SchemaLoader {
     // Apply a schema to an RDD of Java Beans and register it as a table.
     val schemaPeople: DataFrame = sqlCtx.createDataFrame(union);
     schemaPeople.registerTempTable("creditLogDaily");
+    schemaPeople.cache();
   }
 
 }

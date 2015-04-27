@@ -12,7 +12,7 @@ object SqlHelper {
 
 
   def executeSql(sql: String, handler: ResultHander, scLoader: SchemaLoader*): Unit = {
-    val sparkConf = new SparkConf().setMaster("local[6]").set("spark.driver.maxResultSize", "2500m")
+    val sparkConf = new SparkConf().setMaster("local[6]").set("spark.driver.maxResultSize", "5000m")
       .setAppName("JavaSparkSQL").set("spark.executor.memory", "11g");
     val sc = new SparkContext(sparkConf);
     val sqlCtx: SQLContext = new SQLContext(sc);
