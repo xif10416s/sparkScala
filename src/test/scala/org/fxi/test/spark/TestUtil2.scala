@@ -9,7 +9,7 @@ import org.fxi.test.spark.util.SqlHelper
 /**
  * Created by Administrator on 2015/4/26.
  */
-object TestUtil{
+object TestUtil2{
 
   def main(args: Array[String]) {
     println("Hello, world!");
@@ -23,7 +23,7 @@ object TestUtil{
        val count = df.first();
         println(count);
       }
-    },new UserInfoSchemaLoader() ); 
+    },new UserInfoSchemaLoader() );
   }
 
 }
