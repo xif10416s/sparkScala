@@ -18,5 +18,5 @@ object TestScala {
 
   def handler():Unit = {
     println("Hello, world!");
-  }
+  } 
 }
