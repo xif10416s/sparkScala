@@ -37,5 +37,16 @@ object Utils {
       return part.toInt;
   }
 
+  def getCreditObtainTime(serverTime:String , obtainTime:String):String = {
+     if(obtainTime == null || obtainTime.eq("\\N")){
+       return getTimeHoursStr(serverTime);
+     } else {
+       return getTimeHoursStr(obtainTime);
+     }
+  }
+
+  def getTimeHoursStr(time:String):String = {
+    return time.substring(0,time.indexOf(":"));
+  }
 
 }
