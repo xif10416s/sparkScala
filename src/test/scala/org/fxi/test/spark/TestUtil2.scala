@@ -9,7 +9,7 @@ import org.fxi.test.spark.util.SqlHelper
 /**
  * Created by Administrator on 2015/4/26.
  */
-object TestUtil{
+object TestUtil2{
 
   def main(args: Array[String]) {
     println("Hello, world!");
@@ -26,4 +26,13 @@ object TestUtil{
     },new UserInfoSchemaLoader() );
   }
 
+  def testSqlhelperCreditLogDaily(): Unit ={
+    val sqlhelp = SqlHelper;
+    sqlhelp.executeSql("select count(*) from userInfo limit 10" , new ResultHander(){
+      override def handler(df: DataFrame): Unit = {
+        val count = df.first();
+        println(count);
+      }
+    },new UserInfoSchemaLoader() );
+  }
 }

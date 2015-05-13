@@ -23,5 +23,6 @@ class UserInfoSchemaLoader extends SchemaLoader {
     // Apply a schema to an RDD of Java Beans and register it as a table.
     val schemaPeople: DataFrame = sqlCtx.createDataFrame(userInfo);
     schemaPeople.registerTempTable("userInfo");
+    schemaPeople.cache();
   }
 }
